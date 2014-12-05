@@ -33,7 +33,7 @@ else:
    print
    sys.exit(2)
 
-CONFIG_FILE = "../config.ini"
+CONFIG_FILE = "./config.ini"
 
 # Load the configuration file
 with open(CONFIG_FILE,'r+') as f:
@@ -53,7 +53,8 @@ else:
    TOKEN_SHOW="NULL"
 
 CB_URL = "http://"+CB_HOST+":"+CB_PORT
-HEADERS = {'content-type': 'application/json','accept': 'application/json', 'Fiware-Service': CB_FIWARE_SERVICE ,'X-Auth-Token' : TOKEN}
+#HEADERS = {'content-type': 'application/json','accept': 'application/json', 'Fiware-Service': CB_FIWARE_SERVICE ,'X-Auth-Token' : TOKEN}
+HEADERS = {'content-type': 'application/json','accept': 'application/json','X-Auth-Token' : TOKEN}
 HEADERS_SHOW = {'content-type': 'application/json', 'accept': 'application/json' , 'Fiware-Service': CB_FIWARE_SERVICE , 'X-Auth-Token' : TOKEN_SHOW}
 
 PAYLOAD = '{ \
@@ -74,7 +75,7 @@ PAYLOAD = '{ \
     "updateAction": "APPEND" \
 }'
 
-URL = CB_URL + '/v1/updateContext'
+URL = CB_URL + '/ngsi10/updateContext'
 
 print "* Asking to "+URL
 print "* Headers: "+str(HEADERS_SHOW)
