@@ -36,16 +36,23 @@ create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + 
 os.system(create_temp)
 create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "observed_property " + "temperature " + "NaN"
 os.system(create_temp)
+create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "Service2 " + "text " + "on"
+os.system(create_temp)
  
 create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION 
 os.system(create_press)
 create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "observed_property " + "pressure " + "NaN"
 os.system(create_press)
+create_temp = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "Service3 " + "text " + "on"
+os.system(create_temp)
+
  
 create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION 
 os.system(create_pm10)
 create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "observed_property " + "PM10 " + "NaN"
-os.system(create_pm10) 
+os.system(create_pm10)
+create_temp = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "Service1 " + "text " + "on"
+os.system(create_temp)
 
 
 #attendo 45 secondi in modo tale che i file da cui prendere le osservazioni

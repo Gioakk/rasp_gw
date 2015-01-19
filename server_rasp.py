@@ -45,9 +45,9 @@ class start_obs:
 class stop_obs:
 
         def GET(self):
+		#pdb.set_trace()
 		python_process = []
 		list_process = psutil.pids()
-		i = 0
 
 		#ciclio tutti i processi e inserisco in lista solo i tre da killare
 		for pid in list_process:
@@ -60,9 +60,10 @@ class stop_obs:
 				if command[1] == "obd.py" or command[1] == "Shinyei.py" or command[1] == "send_measures.py":
 					print "killed process " + command[1]
 					p.kill()
-					python_process[i] = command[1]
-					i = i + 1	
-                return "stop onservation"
+					#pdb.set_trace()					
+					python_process.append(command[1])
+	
+                return "stop observation"
 
 
 if __name__ == "__main__":
