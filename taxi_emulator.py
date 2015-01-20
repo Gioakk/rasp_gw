@@ -3,12 +3,12 @@ import threading
 import requests
 import random
 
-coords = ["'38.173079, 15.543566'", "'38.188192, 15.556098'", "'38.206404, 15.557471'", "'38.216404, 15.567471'", "'38.226404, 15.577471'", "'38.236404, 15.587471'", "'38.246404, 15.597471'", "'38.256404, 15.607471'"]
+coords = ["'38.173079, 15.543566'", "'38.188192, 15.556098'", "'38.206404, 15.557471'", "'38.170381, 15.541984'", "'38.228524, 15.567047'", "'38.225001, 15.549966'", "'38.238923, 15.575158'"]
 
 taxi_id = "Taxi1"
 
 
-rand_index = random.randint(0,len(coords))	# Calcolo random dell'indice della coordinata iniziale
+rand_index = random.randint(0,len(coords)-1)	# Calcolo random dell'indice della coordinata iniziale
 current_point = coords[rand_index]
 old_point = current_point
 move = True					# Stato del TAXI (true --> in movimento, false --> fermo)
@@ -19,7 +19,7 @@ def change_coords():
 	global rand_index
 	global current_point
 	while 1:
-		time_to_move = random.randint(1,200) 		#tempo di cambio della coordinata
+		time_to_move = random.randint(1000,1500) 		#tempo di cambio della coordinata
 		time.sleep(time_to_move)			
 		rand_index = (rand_index + 1) % len(coords)	
 		current_point = coords[rand_index]		#nuova coordinata corrente
@@ -39,7 +39,7 @@ def check_state():
 				old_point = current_point
 				cont = 0
 				#stop sensoristica
-				#r = requests.get('http://192.168.1.239:1234/stop/observation')
+				r = requests.get('http://localhost:1234/stop/observation')
 				print "Sto partendo: invio lo stop per la sensoristica\n" 
 			else:
 				old_point = current_point
@@ -56,7 +56,9 @@ def check_state():
 					move = False
 					#start sensoristica
 					ts = str(time.time())
-					#r = requests.get('http://192.168.1.239:1234/start/observation?id='+ ts +'&type=observation&position='+current_point)
+					tokens = ts.split('.')
+					ts = tokens[0] + tokens[1]
+					r = requests.get('http://localhost:1234/start/observation?id='+ ts +'&type=observations&position='+current_point)
 					print "Sono fermo da piu' di 90 secondi: invio lo start per la sensoristica\n"+ "id_observation=" + ts + "\ncurrent_position="+ current_point +"\n" 
 
 			

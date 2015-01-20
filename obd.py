@@ -10,7 +10,7 @@ import time
 old_temperature = 0
 old_pressure = 0
 
-connection = obd.OBD("/dev/pts/0")
+connection = obd.OBD("/dev/pts/1")
 
 temperature = obd.commands['AMBIANT_AIR_TEMP']
 pressure = obd.commands['BAROMETRIC_PRESSURE']

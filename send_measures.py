@@ -2,6 +2,7 @@ import os
 import io
 import time
 import sys
+import pdb
 
 NUM_ARG=len(sys.argv)
 COMMAND=sys.argv[0]
@@ -27,33 +28,43 @@ lastModifyPM10 = 0
 #cont = 1
 
 #creo gli id per le tre entita' da ENTITY_ID generale del server
-id_temp = "/temperature/" + ENTITY_ID
-id_pres = "/pressure/" + ENTITY_ID
-id_pm10 = "/pm10/" + ENTITY_ID
+id_temp = "temperature_" + ENTITY_ID
+id_pres = "pressure_" + ENTITY_ID
+id_pm10 = "pm10_" + ENTITY_ID
 
+#pdb.set_trace()
 #fase di creazione delle entita'
-create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION 
+create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION #+ " &" 
 os.system(create_temp)
-create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "observed_property " + "temperature " + "NaN"
+create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "observed_property " + "temperature " + "NaN" #+ " &"
 os.system(create_temp)
-create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "Service2 " + "text " + "on"
+create_temp = "python2.7 createEntity.py" + " " + id_temp + " " + ENTITY_TYPE + " " + "Service2 " + "text " + "on" #+ " &"
 os.system(create_temp)
  
-create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION 
+create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION #+ " &" 
 os.system(create_press)
-create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "observed_property " + "pressure " + "NaN"
+create_press = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "observed_property " + "pressure " + "NaN" #+ " &"
 os.system(create_press)
-create_temp = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "Service3 " + "text " + "on"
+create_temp = "python2.7 createEntity.py" + " " + id_pres + " " + ENTITY_TYPE + " " + "Service3 " + "text " + "on" #+ " &"
 os.system(create_temp)
 
  
-create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION 
+create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "position " + "coords "  + POSITION #+ " &" 
 os.system(create_pm10)
-create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "observed_property " + "PM10 " + "NaN"
+create_pm10 = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "observed_property " + "PM10 " + "NaN" #+ " &"
 os.system(create_pm10)
-create_temp = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "Service1 " + "text " + "on"
+create_temp = "python2.7 createEntity.py" + " " + id_pm10 + " " + ENTITY_TYPE + " " + "Service1 " + "text " + "on" #+ " &"
 os.system(create_temp)
 
+#sottoscrizioni a tutte e tre le entita'
+
+sub_temp = "python2.7 setSubscription.py" + " " + id_temp + " " + "observed_property " + "http://130.206.85.25:7777/accumulate"
+sub_press = "python2.7 setSubscription.py" + " " + id_pres + " " + "observed_property " + "http://130.206.85.25:7777/accumulate"
+sub_pm10 = "python2.7 setSubscription.py" + " " + id_pm10 + " " + "observed_property " + "http://130.206.85.25:7777/accumulate"
+
+os.system(sub_temp)
+os.system(sub_press)
+os.system(sub_pm10)
 
 #attendo 45 secondi in modo tale che i file da cui prendere le osservazioni
 #abbiamo almeno un valore al loro interno
