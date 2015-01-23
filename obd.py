@@ -10,7 +10,7 @@ import time
 old_temperature = 0
 old_pressure = 0
 
-connection = obd.OBD("/dev/pts/1")
+connection = obd.OBD("/dev/pts/0")
 
 temperature = obd.commands['AMBIANT_AIR_TEMP']
 pressure = obd.commands['BAROMETRIC_PRESSURE']
@@ -25,11 +25,11 @@ while 1:
 	if connection.has_command(temperature):
 		response = connection.query(temperature)
 		print response.value, response.unit, temperature.name, temperature.desc
-		if old_temperature != response.value:
-			temp_file = open("obd_temperature", "w")
-			temp_file.write(str(response.value))
-			temp_file.close()
-			old_temperature = response.value
+		#if old_temperature != response.value:
+		temp_file = open("obd_temperature", "w")
+		temp_file.write(str(response.value))
+		temp_file.close()
+		#old_temperature = response.value
 		temp_file_log.write(str(response.value) + "\n")
 		temp_file_log.flush()
 	else:
@@ -38,11 +38,11 @@ while 1:
 	if connection.has_command(pressure):
 		response = connection.query(pressure)
 		print response.value, response.unit, pressure.name, pressure.desc
-		if old_pressure != response.value:
-			pres_file = open("obd_pressure", "w")
-			pres_file.write(str(response.value))
-			pres_file.close()
-			old_pressure = response.value
+		#if old_pressure != response.value:
+		pres_file = open("obd_pressure", "w")
+		pres_file.write(str(response.value))
+		pres_file.close()
+		#old_pressure = response.value
 		pres_file_log.write(str(response.value) + "\n")
 		pres_file_log.flush()
 	else:
